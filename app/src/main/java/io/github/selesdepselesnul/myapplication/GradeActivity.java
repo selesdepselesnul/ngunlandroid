@@ -74,9 +74,6 @@ public class GradeActivity extends AppCompatActivity {
                             tableView.setColumnModel(columnModel);
                             tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(self, new String[] {"Matkul", "SKS", "Huruf", "Nilai"}));
                             tableView.setDataAdapter(new SimpleTableDataAdapter(self, grades));
-                            //TextView helloTextView = (TextView) findViewById(R.id.helloTextView);
-                            //helloTextView.setText(data.toString());
-                            //Log.i("mantab", data.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
