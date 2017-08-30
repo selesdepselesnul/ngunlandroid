@@ -40,11 +40,6 @@ public class GradeActivity extends AppCompatActivity {
         final TableView tableView = (TableView) findViewById(R.id.tableView);
         tableView.setColumnCount(4);
 
-        TableColumnWeightModel columnModel = new TableColumnWeightModel(4);
-        columnModel.setColumnWeight(1, 2);
-        columnModel.setColumnWeight(2, 2);
-        tableView.setColumnModel(columnModel);
-
         final GradeActivity self = this;
 
 
@@ -64,14 +59,19 @@ public class GradeActivity extends AppCompatActivity {
                                 JSONObject grade = (JSONObject)data.get(i);
 
                                 grades.add(new String[] {
-                                        grade.getString("nmmk"),
+                                        grade.getString("kdmk"),
                                         grade.getString("jmlsks"),
                                         grade.getString("nilaihuruf"),
                                         grade.getString("bobotnilai")
                                 });
                             }
                             List<String[]> header = new ArrayList<String[]>();
-
+                            TableColumnWeightModel columnModel = new TableColumnWeightModel(4);
+                            columnModel.setColumnWeight(0, 2);
+                            columnModel.setColumnWeight(1, 2);
+                            columnModel.setColumnWeight(2, 2);
+                            columnModel.setColumnWeight(3, 2);
+                            tableView.setColumnModel(columnModel);
                             tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(self, new String[] {"Matkul", "SKS", "Huruf", "Nilai"}));
                             tableView.setDataAdapter(new SimpleTableDataAdapter(self, grades));
                             //TextView helloTextView = (TextView) findViewById(R.id.helloTextView);
