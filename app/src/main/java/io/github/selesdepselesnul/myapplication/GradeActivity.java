@@ -13,13 +13,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
 import cz.msebera.android.httpclient.Header;
+import de.codecrafters.tableview.TableHeaderAdapter;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.model.TableColumnWeightModel;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
+import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 public class GradeActivity extends AppCompatActivity {
 
@@ -67,7 +70,9 @@ public class GradeActivity extends AppCompatActivity {
                                         grade.getString("bobotnilai")
                                 });
                             }
+                            List<String[]> header = new ArrayList<String[]>();
 
+                            tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(self, new String[] {"Matkul", "SKS", "Huruf", "Nilai"}));
                             tableView.setDataAdapter(new SimpleTableDataAdapter(self, grades));
                             //TextView helloTextView = (TextView) findViewById(R.id.helloTextView);
                             //helloTextView.setText(data.toString());
