@@ -1,9 +1,11 @@
 package io.github.selesdepselesnul.myapplication;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -30,6 +32,9 @@ public class GradeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final boolean isLandscape = getApplicationContext().getResources().getBoolean(R.bool.is_landscape);
+
         setContentView(R.layout.activity_grade);
 
         AsyncHttpClient client = new AsyncHttpClient();
@@ -63,7 +68,7 @@ public class GradeActivity extends AppCompatActivity {
                                 JSONObject grade = (JSONObject)data.get(i);
 
                                 grades.add(new String[] {
-                                        grade.getString("kdmk"),
+                                        grade.getString(isLandscape ? "nmmk" : "kdmk"),
                                         grade.getString("jmlsks"),
                                         grade.getString("nilaihuruf"),
                                         grade.getString("bobotnilai")
@@ -71,12 +76,12 @@ public class GradeActivity extends AppCompatActivity {
                             }
                             List<String[]> header = new ArrayList<String[]>();
                             TableColumnWeightModel columnModel = new TableColumnWeightModel(4);
-                            columnModel.setColumnWeight(0, 2);
+                            columnModel.setColumnWeight(0, isLandscape ? 10 : 2);
                             columnModel.setColumnWeight(1, 2);
                             columnModel.setColumnWeight(2, 2);
                             columnModel.setColumnWeight(3, 2);
                             tableView.setColumnModel(columnModel);
-                            tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(self, new String[] {"Matkul", "SKS", "Huruf", "Nilai"}));
+                            tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(self, new String[] {isLandscape ? "Nama Matkul" : "Kode MK", "SKS", "Huruf", "Nilai"}));
                             tableView.setDataAdapter(new SimpleTableDataAdapter(self, grades));
                         } catch (JSONException e) {
                             e.printStackTrace();
