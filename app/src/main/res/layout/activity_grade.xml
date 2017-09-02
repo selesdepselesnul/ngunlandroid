@@ -8,13 +8,11 @@
 
     <de.codecrafters.tableview.TableView
         android:id="@+id/tableView"
-        android:layout_width="368dp"
-        android:layout_height="495dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="304dp"
+        android:layout_height="437dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:tableView_columnCount="4" />
+        app:tableView_columnCount="4"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
