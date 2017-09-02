@@ -1,5 +1,6 @@
 package io.github.selesdepselesnul.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,7 +36,10 @@ public class GradeActivity extends AppCompatActivity {
 
         RequestParams requestParams = new RequestParams();
 
-        requestParams.put("nim", "41155050140062");
+        Intent intent = getIntent();
+        String id = intent.getStringExtra(MainActivity.ID_MESSAGE);
+
+        requestParams.put("nim", id);
 
         final TableView tableView = (TableView) findViewById(R.id.tableView);
         tableView.setColumnCount(4);
