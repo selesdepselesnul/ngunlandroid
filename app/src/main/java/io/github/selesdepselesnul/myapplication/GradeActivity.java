@@ -1,5 +1,6 @@
 package io.github.selesdepselesnul.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +52,12 @@ public class GradeActivity extends AppCompatActivity {
 
         final GradeActivity self = this;
 
+        Context context = getApplicationContext();
+        CharSequence text = isLandscape ? "Rotate untuk melihat berdasarkan Kode MK" : "Rotate untuk melihat berdasarkan Nama MK";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
 
         client.post("http://www.unla.ac.id/index.php/e_akademic/c_kartuhasilstudi/grid",
                 requestParams,
