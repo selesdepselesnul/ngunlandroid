@@ -8,8 +8,8 @@
 
     <de.codecrafters.tableview.TableView
         android:id="@+id/tableView"
-        android:layout_width="588dp"
-        android:layout_height="514dp"
+        android:layout_width="576dp"
+        android:layout_height="295dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintLeft_toLeftOf="parent"
