@@ -77,18 +77,16 @@ public class GradeActivity extends AppCompatActivity {
                                 grades.add(new String[] {
                                         grade.getString(isLandscape ? "nmmk" : "kdmk"),
                                         grade.getString("jmlsks"),
-                                        grade.getString("nilaihuruf"),
-                                        grade.getString("bobotnilai")
+                                        grade.getString("nilaihuruf")
                                 });
                             }
                             List<String[]> header = new ArrayList<String[]>();
-                            TableColumnWeightModel columnModel = new TableColumnWeightModel(4);
-                            columnModel.setColumnWeight(0, isLandscape ? 10 : 2);
+                            TableColumnWeightModel columnModel = new TableColumnWeightModel(3);
+                            columnModel.setColumnWeight(0, isLandscape ? 10 : 4);
                             columnModel.setColumnWeight(1, 2);
                             columnModel.setColumnWeight(2, 2);
-                            columnModel.setColumnWeight(3, 2);
                             tableView.setColumnModel(columnModel);
-                            tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(self, new String[] {isLandscape ? "Nama Matkul" : "Kode MK", "SKS", "Huruf", "Nilai"}));
+                            tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(self, new String[] {"Matkul", "SKS", "Nilai"}));
                             tableView.setDataAdapter(new SimpleTableDataAdapter(self, grades));
                         } catch (JSONException e) {
                             e.printStackTrace();
