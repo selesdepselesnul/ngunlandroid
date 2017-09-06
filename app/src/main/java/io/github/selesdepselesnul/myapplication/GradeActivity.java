@@ -52,12 +52,7 @@ public class GradeActivity extends AppCompatActivity {
 
         final GradeActivity self = this;
 
-        Context context = getApplicationContext();
-        CharSequence text = isLandscape ? "Rotate untuk melihat berdasarkan Kode MK" : "Rotate untuk melihat berdasarkan Nama MK";
-        int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
 
         client.post("http://www.unla.ac.id/index.php/e_akademic/c_kartuhasilstudi/grid",
                 requestParams,
@@ -88,6 +83,14 @@ public class GradeActivity extends AppCompatActivity {
                             tableView.setColumnModel(columnModel);
                             tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(self, new String[] {"Matkul", "SKS", "Nilai"}));
                             tableView.setDataAdapter(new SimpleTableDataAdapter(self, grades));
+
+                            Context context = getApplicationContext();
+                            CharSequence text = isLandscape ? "Ubah ke potrait untuk lihat berdasarkan kode MK"
+                                                            : "Ubah ke landscape untuk lihat berdasarkan Nama MK";
+                            int duration = Toast.LENGTH_SHORT;
+
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
