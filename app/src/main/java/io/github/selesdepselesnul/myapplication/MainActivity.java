@@ -1,6 +1,7 @@
 package io.github.selesdepselesnul.myapplication;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,5 +40,10 @@ public class MainActivity extends AppCompatActivity {
         String message = editText.getText().toString();
         intent.putExtra(ID_MESSAGE, message);
         startActivity(intent);
+    }
+
+    public void onClickCreatedBy(View view) {
+        Intent browser= new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/selesdepselesnul"));
+        startActivity(browser);
     }
 }

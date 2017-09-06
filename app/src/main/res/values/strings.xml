@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ngulandroid</string>
+    <string name="creator">Created By <a href="https://github.com/selesdepselesnul" target="_top">Moch Deden</a></string>
 </resources>
