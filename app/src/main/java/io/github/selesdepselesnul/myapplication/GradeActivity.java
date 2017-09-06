@@ -87,7 +87,7 @@ public class GradeActivity extends AppCompatActivity {
                             Context context = getApplicationContext();
                             CharSequence text = isLandscape ? "Ubah ke potrait untuk lihat berdasarkan kode MK"
                                                             : "Ubah ke landscape untuk lihat berdasarkan Nama MK";
-                            int duration = Toast.LENGTH_SHORT;
+                            int duration = Toast.LENGTH_LONG;
 
                             Toast toast = Toast.makeText(context, text, duration);
                             toast.show();
