@@ -1,11 +1,16 @@
 package io.github.selesdepselesnul.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.icu.text.IDNA;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -28,11 +33,18 @@ import de.codecrafters.tableview.model.TableColumnWeightModel;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
-public class GradeActivity extends AppCompatActivity {
+import static android.view.View.INVISIBLE;
+//import static io.github.selesdepselesnul.myapplication.R.id.progressBar;
 
+public class GradeActivity extends AppCompatActivity {
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+
+        //progressBar.setVisibility(View.VISIBLE);
 
         final boolean isLandscape = getApplicationContext().getResources().getBoolean(R.bool.is_landscape);
 
@@ -51,8 +63,13 @@ public class GradeActivity extends AppCompatActivity {
         tableView.setColumnCount(4);
 
         final GradeActivity self = this;
+        final ProgressDialog progress = new ProgressDialog(this);
+        progress.setMessage("Loading Nilai...");
+        progress.setProgressStyle(R.style.ProgressBar);
+        progress.setIndeterminate(true);
 
-
+        progress.show();
+//        progressBar.setVisibility(View.VISIBLE);
 
         client.post("http://www.unla.ac.id/index.php/e_akademic/c_kartuhasilstudi/grid",
                 requestParams,
@@ -61,6 +78,8 @@ public class GradeActivity extends AppCompatActivity {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         // If the response is JSONObject instead of expected JSONArray
                         try {
+
+
                             JSONArray data = response.getJSONArray("data");
 
                             List<String[]> grades = new ArrayList<String[]>();
@@ -90,11 +109,24 @@ public class GradeActivity extends AppCompatActivity {
                             int duration = Toast.LENGTH_LONG;
 
                             Toast toast = Toast.makeText(context, text, duration);
+
                             toast.show();
+                            progress.cancel();
+//                            progressBar.setVisibility(View.INVISIBLE);
+
                         } catch (JSONException e) {
-                            e.printStackTrace();
+//                            e.printStackTrace();
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    progressBar.setVisibility(View.GONE);
+//                                }
+//                            });
                         }
                     }
+
+
                 });
     }
+
 }
