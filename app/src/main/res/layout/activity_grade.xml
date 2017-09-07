@@ -4,20 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.selesdepselesnul.myapplication.GradeActivity">
+    tools:context="io.github.selesdepselesnul.myapplication.GradeActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <de.codecrafters.tableview.TableView
         android:id="@+id/tableView"
-        android:layout_width="281dp"
-        android:layout_height="415dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tableView_columnCount="4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp"
-        tools:layout_editor_absoluteY="14dp"></de.codecrafters.tableview.TableView>
+        app:tableView_columnCount="4"></de.codecrafters.tableview.TableView>
 </android.support.constraint.ConstraintLayout>
