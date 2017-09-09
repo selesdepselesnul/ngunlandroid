@@ -54,7 +54,7 @@ public class GradeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         this.studentId = intent.getStringExtra(MainActivity.ID_MESSAGE);
-        requestParams.put("nim", studentId);
+        requestParams.put("nim", this.studentId);
 
         final TableView tableView = (TableView) findViewById(R.id.tableView);
         tableView.setColumnCount(4);
@@ -131,6 +131,16 @@ public class GradeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(
+                getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE);
+        String bookmarkedId = sharedPref.getString(getString(R.string.bookmarked_id), "");
+
+        if(bookmarkedId.equals(this.studentId)) {
+            MenuItem bookmarkButton = (MenuItem) menu.findItem(R.id.bookmarkButton);
+            bookmarkButton.setIcon(R.drawable.ic_turned_in_black_24dp);
+        }
+
         return true;
     }
 
