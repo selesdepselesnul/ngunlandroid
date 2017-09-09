@@ -8,7 +8,11 @@ import android.icu.text.IDNA;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ActionMenuItem;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -24,7 +28,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 import cz.msebera.android.httpclient.Header;
 import de.codecrafters.tableview.TableHeaderAdapter;
@@ -38,6 +41,8 @@ import static android.view.View.INVISIBLE;
 
 public class GradeActivity extends AppCompatActivity {
     private ProgressBar progressBar;
+    private boolean isBookmarked = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,6 +132,30 @@ public class GradeActivity extends AppCompatActivity {
 
 
                 });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.bookmarkButton) {
+            if(isBookmarked) {
+                item.setIcon(R.drawable.ic_turned_in_not_black_24dp);
+                isBookmarked = false;
+            } else {
+                item.setIcon(R.drawable.ic_turned_in_black_24dp);
+                isBookmarked = true;411
+            }
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
 }
