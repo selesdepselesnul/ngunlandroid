@@ -150,7 +150,7 @@ public class GradeActivity extends AppCompatActivity {
                 isBookmarked = false;
             } else {
                 item.setIcon(R.drawable.ic_turned_in_black_24dp);
-                isBookmarked = true;411
+                isBookmarked = true;
             }
             return true;
         } else {
