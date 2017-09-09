@@ -146,22 +146,24 @@ public class GradeActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(
+                getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        String bookmarkedIdString = getString(R.string.bookmarked_id);
         if(item.getItemId() == R.id.bookmarkButton) {
             if(isBookmarked) {
                 item.setIcon(R.drawable.ic_turned_in_not_black_24dp);
+                editor.putString(bookmarkedIdString, "");
+
                 isBookmarked = false;
             } else {
-                SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(
-                        getString(R.string.preference_file_key),
-                        Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString(getString(R.string.bookmarked_id), this.studentId);
-                editor.commit();
+                editor.putString(bookmarkedIdString, this.studentId);
 
                 item.setIcon(R.drawable.ic_turned_in_black_24dp);
                 isBookmarked = true;
             }
+            editor.commit();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
