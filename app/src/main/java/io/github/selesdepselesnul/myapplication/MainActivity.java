@@ -1,6 +1,8 @@
 package io.github.selesdepselesnul.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +33,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(
+                getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE);
+        String bookmarkedId = sharedPref.getString(getString(R.string.bookmarked_id), "");
+        TextView idEditText = (TextView) findViewById(R.id.idEditText);
+        idEditText.setText(bookmarkedId);
     }
 
     public void onClickSeeGrade(View view) {

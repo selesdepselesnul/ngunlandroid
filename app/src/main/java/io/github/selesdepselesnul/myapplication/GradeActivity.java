@@ -3,6 +3,7 @@ package io.github.selesdepselesnul.myapplication;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.icu.text.IDNA;
 import android.os.Handler;
@@ -26,31 +27,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
-import de.codecrafters.tableview.TableHeaderAdapter;
 import de.codecrafters.tableview.TableView;
 import de.codecrafters.tableview.model.TableColumnWeightModel;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
-import static android.view.View.INVISIBLE;
-//import static io.github.selesdepselesnul.myapplication.R.id.progressBar;
 
 public class GradeActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private boolean isBookmarked = false;
+    private String studentId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-
-        //progressBar.setVisibility(View.VISIBLE);
-
         final boolean isLandscape = getApplicationContext().getResources().getBoolean(R.bool.is_landscape);
 
         setContentView(R.layout.activity_grade);
@@ -60,9 +53,8 @@ public class GradeActivity extends AppCompatActivity {
         RequestParams requestParams = new RequestParams();
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra(MainActivity.ID_MESSAGE);
-
-        requestParams.put("nim", id);
+        this.studentId = intent.getStringExtra(MainActivity.ID_MESSAGE);
+        requestParams.put("nim", studentId);
 
         final TableView tableView = (TableView) findViewById(R.id.tableView);
         tableView.setColumnCount(4);
@@ -74,7 +66,8 @@ public class GradeActivity extends AppCompatActivity {
         progress.setIndeterminate(true);
 
         progress.show();
-//        progressBar.setVisibility(View.VISIBLE);
+
+
 
         client.post("http://www.unla.ac.id/index.php/e_akademic/c_kartuhasilstudi/grid",
                 requestParams,
@@ -149,6 +142,13 @@ public class GradeActivity extends AppCompatActivity {
                 item.setIcon(R.drawable.ic_turned_in_not_black_24dp);
                 isBookmarked = false;
             } else {
+                SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(
+                        getString(R.string.preference_file_key),
+                        Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(getString(R.string.bookmarked_id), this.studentId);
+                editor.commit();
+
                 item.setIcon(R.drawable.ic_turned_in_black_24dp);
                 isBookmarked = true;
             }
