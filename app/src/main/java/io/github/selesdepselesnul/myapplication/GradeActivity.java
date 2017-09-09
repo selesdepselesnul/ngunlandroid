@@ -155,10 +155,12 @@ public class GradeActivity extends AppCompatActivity {
             if(isBookmarked) {
                 item.setIcon(R.drawable.ic_turned_in_not_black_24dp);
                 editor.putString(bookmarkedIdString, "");
+                Toast.makeText(getApplicationContext(), "npm " + this.studentId + " batal di bookmark", Toast.LENGTH_SHORT).show();
 
                 isBookmarked = false;
             } else {
                 editor.putString(bookmarkedIdString, this.studentId);
+                Toast.makeText(getApplicationContext(), "npm " + this.studentId + " di bookmark", Toast.LENGTH_SHORT).show();
 
                 item.setIcon(R.drawable.ic_turned_in_black_24dp);
                 isBookmarked = true;
